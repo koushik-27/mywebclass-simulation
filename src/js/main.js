@@ -20,6 +20,7 @@ window.addEventListener('resize', () => {
     allPage.initialize()
   }, 250)
 })
+
 function createPrivacyModal () {
   const modalHtml = `
     <div class="modal fade" id="privacyModal" tabindex="-1">
