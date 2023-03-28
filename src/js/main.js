@@ -47,28 +47,31 @@ function createPrivacyModal () {
   document.body.insertAdjacentHTML('beforeend', modalHtml)
 }
 
-function initializePrivacyModal () {
-  const privacyModal = new Modal(document.getElementById('privacyModal'))
+ function initializePrivacyModal () {
+  // Only show the modal on the homepage
+  if (window.location.pathname === '/') {
+    const privacyModal = new Modal(document.getElementById('privacyModal'))
 
-  // Check if the user has already agreed to the policy
-  const agreed = localStorage.getItem('privacyPolicyAgreed') === 'true'
-  if (!agreed) {
-    // Show the modal if the user hasn't agreed
-    privacyModal.show()
-  }
+    // Check if the user has already agreed to the policy
+    const agreed = localStorage.getItem('privacyPolicyAgreed') === 'true'
+    if (!agreed) {
+      // Show the modal if the user hasn't agreed
+      privacyModal.show()
+    }
 
-  // Handle the click event on the Agree button
-  const agreeButton = document.getElementById('agreeButton')
-  agreeButton.addEventListener('click', () => {
-    // Remember the user's choice
-    localStorage.setItem('privacyPolicyAgreed', 'true')
-    // Hide the modal
-    privacyModal.hide()
-    // Enable Google Analytics tracking
-    gtag('consent', 'update', {
-      analytics_storage: 'granted'
+    // Handle the click event on the Agree button
+    const agreeButton = document.getElementById('agreeButton')
+    agreeButton.addEventListener('click', () => {
+      // Remember the user's choice
+      localStorage.setItem('privacyPolicyAgreed', 'true')
+      // Hide the modal
+      privacyModal.hide()
+      // Enable Google Analytics tracking
+      gtag('consent', 'update', {
+        analytics_storage: 'granted'
+      })
     })
-  })
+  }
 }
 
 function loadGoogleAnalytics () {
@@ -160,3 +163,6 @@ function createCookieBanner() {
    createCookieBanner()
    initializeCookieBanner()
  })
+
+
+
